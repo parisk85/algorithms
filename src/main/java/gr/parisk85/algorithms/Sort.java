@@ -11,12 +11,12 @@ public class Sort {
         }
 
         int middle = (array.length - 1) / 2;
-        T[] left= merge(Arrays.copyOfRange(array, 0, middle + 1));
+        T[] left = merge(Arrays.copyOfRange(array, 0, middle + 1));
         T[] right = merge(Arrays.copyOfRange(array, middle + 1, array.length));
 
         return mergeArrays(left, right);
     }
-    
+
     private static <T extends Comparable> T[] mergeArrays(T[] left, T[] right) {
         int leftIndex = 0, rightIndex = 0, n = left.length + right.length;
         @SuppressWarnings("unchecked")
