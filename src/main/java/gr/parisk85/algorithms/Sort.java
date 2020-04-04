@@ -20,18 +20,18 @@ public class Sort {
     private static <T extends Comparable> T[] mergeArrays(T[] left, T[] right) {
         int leftIndex = 0, rightIndex = 0, n = left.length + right.length;
         @SuppressWarnings("unchecked")
-        T[] result = (T[]) Array.newInstance(left[0].getClass(), n);
-        int resultIndex = 0;
+        T[] merged = (T[]) Array.newInstance(left[0].getClass(), n);
+        int mergedIndex = 0;
         while (leftIndex < left.length && rightIndex < right.length) {
-            result[resultIndex++] = left[leftIndex].compareTo(right[rightIndex]) <= 0 ?
+            merged[mergedIndex++] = left[leftIndex].compareTo(right[rightIndex]) <= 0 ?
                     left[leftIndex++] : right[rightIndex++];
         }
         while (leftIndex < left.length) {
-            result[resultIndex++] = left[leftIndex++];
+            merged[mergedIndex++] = left[leftIndex++];
         }
         while (rightIndex < right.length) {
-            result[resultIndex++] = right[rightIndex++];
+            merged[mergedIndex++] = right[rightIndex++];
         }
-        return result;
+        return merged;
     }
 }
