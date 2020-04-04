@@ -16,7 +16,7 @@ public class Search {
         }
         return Optional.empty();
     }
-     
+
     /*
      * Time complexity O(log(n))
      * Array must be sorted
@@ -28,7 +28,7 @@ public class Search {
 
     private static <T extends Comparable> Optional<Integer> binary(T element, int startIndex, int endIndex, T... array) {
         if (endIndex - startIndex >= 0) {
-            int middle = startIndex + (endIndex - startIndex) / 2;
+            int middle = (endIndex + startIndex) / 2;
             if (array[middle] == element) {
                 return Optional.of(middle);
             }
