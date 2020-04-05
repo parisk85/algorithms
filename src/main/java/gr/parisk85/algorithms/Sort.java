@@ -20,7 +20,7 @@ public class Sort {
     private static <T extends Comparable> T[] mergeArrays(T[] left, T[] right) {
         int leftIndex = 0, rightIndex = 0, n = left.length + right.length;
         @SuppressWarnings("unchecked")
-        T[] merged = (T[]) Array.newInstance(left[0].getClass(), n);
+        T[] merged = (T[]) Array.newInstance(getTypeFromNonEmptyArray(left, right), n);
         int mergedIndex = 0;
         while (leftIndex < left.length && rightIndex < right.length) {
             merged[mergedIndex++] = left[leftIndex].compareTo(right[rightIndex]) <= 0 ?
@@ -33,5 +33,37 @@ public class Sort {
             merged[mergedIndex++] = right[rightIndex++];
         }
         return merged;
+    }
+
+    private static <T extends Comparable> Class<? extends Comparable> getTypeFromNonEmptyArray(T[] a, T[] b) {
+        assert a.length + b.length > 0;
+        return a.length != 0 ? a[0].getClass() : b[0].getClass();
+    }
+
+    public static <T extends Comparable> T[] quick(T... array) {
+        return quick(0, array.length - 1, array);
+    }
+
+    private static <T extends Comparable> T[] quick(int startIndex, int endIndex, T... array) {
+        if (startIndex < endIndex) {
+            T pivot = array[endIndex];
+            int i = 0;
+            for (int j = 0; j < endIndex; j++) {
+                if (pivot.compareTo(array[j]) >= 0) {
+                    swap(array, i++, j);
+                }
+            }
+            swap(array, i, endIndex);
+            quick(startIndex, i - 1, array);
+            quick(i + 1, endIndex, array);
+        }
+        return array;
+    }
+
+    private static <T> T[] swap(T[] array, int indexA, int indexB) {
+        T temp = array[indexA];
+        array[indexA] = array[indexB];
+        array[indexB] = temp;
+        return array;
     }
 }
