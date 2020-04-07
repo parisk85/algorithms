@@ -1,6 +1,7 @@
 package gr.parisk85.algorithms.structures;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class DynamicArray<T> {
     private T[] array;
@@ -20,10 +21,18 @@ public class DynamicArray<T> {
     }
 
     public void add(T element) {
+        add(element, size);
+    }
+
+    public void add(T element, int index) {
         if (size == capacity) {
             increaseCapacity();
         }
-        array[size++] = element;
+        for (int i = size - 1; i >= index; i--) {
+            array[i + 1] = array[i];
+        }
+        array[index] = element;
+        size++;
     }
 
     public int size() {
@@ -32,11 +41,7 @@ public class DynamicArray<T> {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("[");
-        for (int i = 0; i < size; i++) {
-            result.append(String.format("%s, ", array[i]));
-        }
-        return result.append("]").toString();
+        return Arrays.toString(Arrays.copyOfRange(array, 0, size));
     }
 
     private void increaseCapacity() {

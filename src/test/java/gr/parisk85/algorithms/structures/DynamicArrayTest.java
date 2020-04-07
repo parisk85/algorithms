@@ -40,6 +40,33 @@ public class DynamicArrayTest {
         actual.add(6);
         actual.add(7);
         actual.add(8);
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8]", actual.toString());
+    }
+
+    @Test
+    public void shouldReturnExpectedArraySizeAfterAddingMultipleElements() {
+        DynamicArray<Integer> actual = DynamicArray.of(1, 2);
+        actual.add(3);
+        actual.add(4);
+        actual.add(5);
+        actual.add(6);
+        actual.add(7);
+        actual.add(8);
         assertEquals(8, actual.size());
+    }
+
+    @Test
+    public void shouldReturnExpectedArrayAfterAdditions() {
+        DynamicArray<Integer> actual = DynamicArray.of(1);
+        actual.add(2);
+        actual.add(3);
+        assertEquals("[1, 2, 3]", actual.toString());
+    }
+
+    @Test
+    public void shouldReturnExpectedArrayAfterAddToIndex() {
+        DynamicArray<Character> actual = DynamicArray.of('a', 'c', 'd');
+        actual.add('b', 1);
+        assertEquals("[a, b, c, d]", actual.toString());
     }
 }
