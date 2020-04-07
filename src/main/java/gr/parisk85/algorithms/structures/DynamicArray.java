@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class DynamicArray<T> {
+    private static final int INITIAL_CAPACITY = 2;
     private T[] array;
     private int size;
     private int capacity;
@@ -14,7 +15,7 @@ public class DynamicArray<T> {
 
     private DynamicArray(T... elements) {
         size = elements.length;
-        capacity = elements.length + 2;
+        capacity = elements.length + INITIAL_CAPACITY;
         array = initializeArray(capacity,
                 elements.length == 0 ? Object.class : elements[0].getClass(),
                 elements);
@@ -33,6 +34,21 @@ public class DynamicArray<T> {
         }
         array[index] = element;
         size++;
+    }
+
+    public T get(int index) {
+        //TODO:
+        return null;
+    }
+
+    public void remove(int index) {
+        //TODO:
+    }
+
+    public void clear() {
+        size = 0;
+        capacity = INITIAL_CAPACITY;
+        array = initializeArray(capacity, Object.class);
     }
 
     public int size() {

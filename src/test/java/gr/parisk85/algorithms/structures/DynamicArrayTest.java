@@ -69,4 +69,18 @@ public class DynamicArrayTest {
         actual.add('b', 1);
         assertEquals("[a, b, c, d]", actual.toString());
     }
+
+    @Test
+    public void shouldReturnEmptyArrayOnClear() {
+        DynamicArray<String> actual = DynamicArray.of("a", "b", "c");
+        actual.clear();
+        assertEquals("[]", actual.toString());
+    }
+
+    @Test
+    public void shouldReturnZeroSizeOnClear() {
+        DynamicArray<String> actual = DynamicArray.of("a", "b", "c");
+        actual.clear();
+        assertEquals(0, actual.size());
+    }
 }
